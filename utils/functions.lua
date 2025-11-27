@@ -47,6 +47,39 @@ function M.get_cwd(pane, max_width)
   return cwd
 end
 
+function M.get_remote_info(pane, max_len)
+  local uri = pane:get_current_working_dir()
+  -- wezterm.log_info("URI:", uri, "type:", type(uri))
+
+  if type(uri) ~= "string" then
+    uri = ""
+  end
+
+  local user, host, path =
+    string.match(uri, "^file://([^@]+)@([^/]+)(/.+)$")
+
+  if not user then
+    local distro
+    distro, path = string.match(uri, "^wsl://([^/]+)(/.+)$")
+    if distro then
+      host = distro
+      user = os.getenv("USER") or os.getenv("USERNAME") or "user"
+    end
+  end
+
+  if not user then
+    host = wezterm.hostname()
+    user = os.getenv("USER") or os.getenv("USERNAME") or "user"
+    path = uri:match("^file:///(.+)$") or os.getenv("HOME") or "~"
+  end
+
+  if max_len and path and #path > max_len then
+    path = "…" .. path:sub(-max_len)
+  end
+
+  return path, user, host
+end
+
 -- Workspace management
 function M.switch_workspace(window, pane, workspace)
   local current = window:active_workspace()

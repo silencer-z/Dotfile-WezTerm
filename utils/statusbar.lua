@@ -80,6 +80,10 @@ function M.create_right_status(cwd, username, hostname, time)
       table.insert(formatted, item)
     end
   end
+  
+  table.insert(formatted, { Background = { Color = colors.bg() } })
+  table.insert(formatted, { Foreground = { Color = colors.bg() } })
+  table.insert(formatted, { Text = " " })
 
   return wezterm.format(formatted)
 end

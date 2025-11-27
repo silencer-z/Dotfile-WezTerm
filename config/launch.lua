@@ -83,7 +83,7 @@ function M.get_domains()
         distribution = "Arch",
         username = "orz",
         default_cwd = "/home/orz",
-        default_prog = { "zsh" },
+        default_prog = { "fish" },
       },
     },
   }

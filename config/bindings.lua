@@ -13,9 +13,11 @@ local TIMEOUT = { key = 3000, leader = 1500 }
 
 function M.apply(config)
   config.disable_default_key_bindings = true
+  config.disable_default_mouse_bindings = true
   config.leader = { key = "Space", mods = M.SUPER_REV, timeout_milliseconds = TIMEOUT.leader }
   config.keys = M.get_keys()
   config.key_tables = M.get_key_tables()
+  config.mouse_bindings = M.get_mouse_bindings()
 end
 
 function M.get_keys()
@@ -27,7 +29,6 @@ function M.get_keys()
     -- { key = "F4", mods = "NONE", action = M.activate_table("copy") },
 
     { key = "F1", mods = "NONE", action = action.ShowLauncherArgs { flags = "FUZZY|LAUNCH_MENU_ITEMS" } },
-    -- { key = "d", mods = "LEADER", action = action.ShowDebugOverlay },
     { key = "F2", mods = "NONE", action = action.ActivateCommandPalette },
     { key = "F3", mods = "NONE", action = action.ActivateCopyMode },
 
@@ -40,7 +41,7 @@ function M.get_keys()
     },
 
     -- Application
-    { key = "q", mods = "CTRL", action = action.QuitApplication },
+    -- { key = "q", mods = "CTRL", action = action.QuitApplication },
     { key = "/", mods = "CTRL", action = action.Search { CaseInSensitiveString = "" } },
     -- Font size
     { key = "0", mods = "CTRL", action = action.ResetFontSize },
@@ -142,6 +143,28 @@ function M.get_key_tables()
       { key = "c", action = M.spawn_command("VS Code", { "zsh", "-lc", "code ." }) },
       { key = "u", action = M.open_url_action() },
     }
+  }
+end
+
+-- 设置鼠标快捷键
+function M.get_mouse_bindings()
+  return {
+    {  -- 左键选择文本并复制到剪贴板
+        event = {Up = {streak = 1, button = 'Left'}},
+        mods = 'NONE',
+        action = wezterm.action.CompleteSelection('Clipboard')
+    },
+    {  -- 右键粘贴剪贴板内容
+        event = {Down = {streak = 1, button = 'Right'}},
+        mods = 'NONE',
+        action = wezterm.action.PasteFrom('Clipboard')
+    },
+    {
+        -- 按住 Ctrl 点击左键打开超链接
+        event = {Up = {streak = 1, button = 'Left'}},
+        mods = 'CTRL',
+        action = wezterm.action.OpenLinkAtMouseCursor
+    },
   }
 end
 

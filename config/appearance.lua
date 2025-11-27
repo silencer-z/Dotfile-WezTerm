@@ -26,12 +26,15 @@ function M.apply(config)
 
   -- Font configuration
   config.font = wezterm.font_with_fallback({
-    "Maple Mono SC NF",
+    "Maple Mono NF CN",
+    "JetBrains Mono",
     "更纱终端书呆黑体-简",
-    "JetBrainsMono Nerd Font",
   })
-  config.font_size = 11.0
-  config.line_height = 1.2
+  -- config.dpi = 96 
+  config.font_size = 12.0
+  config.font_shaper = "Harfbuzz"
+  -- config.font 
+  -- config.line_height = 1
 
   -- Window appearance
   config.window_frame = {
@@ -45,12 +48,12 @@ function M.apply(config)
     border_top_color = colors.bg(),
   }
 
-  config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
-  config.window_padding = { left = 5, right = 5, top = 5, bottom = 0 }
+  config.window_decorations = "NONE | RESIZE"
+  config.window_padding = { left = 12, right = 12, top = 5, bottom = 0 }
 
   -- Transparency and effects
-  config.text_background_opacity = 0.95
-  config.window_background_opacity = 0.95
+  config.text_background_opacity = 0.9
+  config.window_background_opacity = 0.9
 
   config.visual_bell = {
     fade_in_function = 'Constant',

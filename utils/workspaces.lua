@@ -12,7 +12,7 @@ M.config = {
     {
       name = "Arch",
       domain = { DomainName = 'WSL:Arch' },
-      default_prog = { "zsh" },
+      default_prog = { "fish" },
       tabs = {"WSL"}
       -- path = "/home/orz",
     },

@@ -50,8 +50,10 @@ function M.update_status(window, pane)
   end
 
   -- Get system info
+  -- local cwd, username, hostname = functions.get_remote_info(pane, 35)
+  -- wezterm.log_warn("cwd:", cwd, "user:", username, "host:", hostname)
   local cwd = functions.get_cwd(pane, 35)
-  local username = os.getenv("USER") or "user"
+  local username = os.getenv("USER") or "Yasusi"
   local hostname = wezterm.hostname() or "localhost"
   local time = wezterm.strftime("%H:%M")
 
