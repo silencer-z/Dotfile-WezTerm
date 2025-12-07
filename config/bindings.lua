@@ -149,27 +149,40 @@ end
 -- 设置鼠标快捷键
 function M.get_mouse_bindings()
   return {
-    {  -- 拖动时开始/扩展选区
+    { event = { Down = { streak = 1, button = 'Left' } },
+      mods = 'NONE',
+      action = wezterm.action.SelectTextAtMouseCursor 'Cell' 
+    },
+    { -- 拖动时开始/扩展选区
       event = { Drag = { streak = 1, button = 'Left' } },
       mods = 'NONE',
       action = wezterm.action.ExtendSelectionToMouseCursor('Cell'),
     },
-    {  -- 左键选择文本并复制到剪贴板
-        event = {Up = {streak = 1, button = 'Left'}},
-        mods = 'NONE',
-        action = wezterm.action.CompleteSelection('Clipboard')
+    { -- 左键选择文本并复制到剪贴板
+      event = {Up = {streak = 1, button = 'Left'}},
+      mods = 'NONE',
+      action = wezterm.action.CompleteSelection('Clipboard')
     },
-    {  -- 右键粘贴剪贴板内容
-        event = {Down = {streak = 1, button = 'Right'}},
-        mods = 'NONE',
-        action = wezterm.action.PasteFrom('Clipboard')
+    { -- 右键粘贴剪贴板内容
+      event = {Down = {streak = 1, button = 'Right'}},
+      mods = 'NONE',
+      action = wezterm.action.PasteFrom('Clipboard')
     },
-    {
-        -- 按住 Ctrl 点击左键打开超链接
-        event = {Up = {streak = 1, button = 'Left'}},
-        mods = 'CTRL',
-        action = wezterm.action.OpenLinkAtMouseCursor
+    { -- 按住 Ctrl 点击左键打开超链接
+      event = {Up = {streak = 1, button = 'Left'}},
+      mods = 'CTRL',
+      action = wezterm.action.OpenLinkAtMouseCursor
     },
+    { -- 向上滚 3 行
+      event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+      mods = 'NONE',
+      action = wezterm.action.ScrollByLine(-3) 
+    },   
+    { -- 向下滚 3 行
+      event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+      mods = 'NONE',
+      action = wezterm.action.ScrollByLine(3) 
+    },   
   }
 end
 
