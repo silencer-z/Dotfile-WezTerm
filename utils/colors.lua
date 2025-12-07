@@ -42,7 +42,7 @@ function M.get_all()
 end
 
 -- Quick color accessors
-function M.bg() return M.get("background", "#222436") end
+function M.bg() return M.get("background", "#2f334d") end
 function M.fg() return M.get("foreground", "#c6d0f5") end
 function M.cursor() return M.get(16, "#c6d0f5") end
 function M.red() return M.get(1, "#e78284") end

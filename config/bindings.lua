@@ -149,6 +149,11 @@ end
 -- 设置鼠标快捷键
 function M.get_mouse_bindings()
   return {
+    {  -- 拖动时开始/扩展选区
+      event = { Drag = { streak = 1, button = 'Left' } },
+      mods = 'NONE',
+      action = wezterm.action.ExtendSelectionToMouseCursor('Cell'),
+    },
     {  -- 左键选择文本并复制到剪贴板
         event = {Up = {streak = 1, button = 'Left'}},
         mods = 'NONE',
